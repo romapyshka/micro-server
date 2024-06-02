@@ -1,20 +1,15 @@
 import { Module } from '@nestjs/common';
-import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ConfigModule } from "@nestjs/config";
+import { NotificationModule } from './notification/notification.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    ClientsModule.register([
-      {
-        name: 'NOTIFICATION_SERVICE',
-        transport: Transport.REDIS,
-        options: {
-          host: 'localhost',
-          port: 6379,
-        },
-      },
-    ]),
+    ConfigModule.forRoot({ isGlobal: true }),
+    NotificationModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
