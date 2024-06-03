@@ -7,7 +7,7 @@ import { ClientsModule, Transport } from "@nestjs/microservices";
     ConfigModule.forRoot({ isGlobal: true }),
     ClientsModule.registerAsync([
       {
-        name: "NOTIFICATION_SERVICE",
+        name: "DATABASE_SERVICE",
         useFactory: async (configService: ConfigService) => ({
           transport: Transport.REDIS,
           options: {
@@ -21,5 +21,6 @@ import { ClientsModule, Transport } from "@nestjs/microservices";
   ],
   exports: [ClientsModule],
 })
-export class NotificationModule {
+export class DatabaseModule {
+
 }

@@ -1,4 +1,5 @@
 import { Body, Controller, Post } from "@nestjs/common";
+import { lastValueFrom } from "rxjs";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserService } from "./user.service";
 
@@ -9,7 +10,7 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    console.log("FIRST")
-    return this.userService.createUser(createUserDto);
+    console.log("Creating user");
+    return lastValueFrom(this.userService.createUser(createUserDto));
   }
 }
